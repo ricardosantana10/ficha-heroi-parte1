@@ -1256,67 +1256,7 @@ textarea {
 }
 
 
-@media (max-width: 800px) {
 
-    .nav {
-        display: none;
-    }
-
-    .hero {
-
-        min-height: 850px;
-
-        align-items: flex-end;
-
-        padding-bottom: 70px;
-    }
-
-    .hero-image {
-
-        opacity: .55;
-    }
-
-    .hero-overlay {
-
-        background:
-            linear-gradient(
-                0deg,
-                #050505 5%,
-                rgba(5,5,5,.65) 65%,
-                rgba(5,5,5,.15)
-            );
-    }
-
-    .hero-content {
-
-        width: 90%;
-
-        margin-left: 6%;
-    }
-
-    .character,
-    .inventory-content,
-    .contact-container {
-
-        grid-template-columns: 1fr;
-    }
-
-    .section-image {
-        height: 500px;
-    }
-
-    .weapon-image {
-        height: 500px;
-    }
-
-    .contact-container {
-        padding: 40px 25px;
-    }
-
-    .footer-top {
-        grid-template-columns: 1fr 1fr;
-    }
-}
 
 
 @media (max-width: 550px) {
