@@ -6,38 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>KAEL | O Último Guardião</title>
+
+    <!-- FONTES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- ÍCONES -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
+
+    <!-- ================= HEADER ================= -->
+
     <header class="header">
 
         <a href="#inicio" class="logo">
             KAEL
         </a>
 
-        <button
-    class="menu-toggle"
-    id="menu-toggle"
-    aria-label="Abrir menu"
-    aria-expanded="false"
-    aria-controls="nav"
->
-    <span></span>
-    <span></span>
-    <span></span>
-</button>
+        <nav class="nav">
 
-        <nav class="nav" id="nav">
             <a href="#inicio">Início</a>
             <a href="#personagem">Personagem</a>
             <a href="#atributos">Atributos</a>
             <a href="#inventario">Inventário</a>
             <a href="#conquistas">Conquistas</a>
             <a href="#contato">Contato</a>
+
         </nav>
 
         <a href="#contato" class="header-button">
@@ -46,13 +48,27 @@
 
     </header>
 
+
     <main>
+
+        <!-- ================= HERO ================= -->
 
         <section class="hero" id="inicio">
 
+            <!--
+                COLOQUE A IMAGEM DO PERSONAGEM AQUI
+
+                Exemplo:
+                img/kael.png
+            -->
+
             <div class="hero-image">
-                <img src="imagens/imagem2_rosto.png" alt="Kael, o Último Guardião">
+
+                <img src=""
+                    alt="Kael, o Último Guardião">
+
             </div>
+
 
             <div class="hero-overlay"></div>
 
@@ -97,11 +113,18 @@
 
         </section>
 
+
+        <!-- ================= PERSONAGEM ================= -->
+
         <section class="section character" id="personagem">
 
             <div class="section-image">
-                <img src="imagens/imagem1_personagem_sem_fundo.png"
+
+                <!-- IMAGEM DO PERSONAGEM -->
+
+                <img src="img/kael-rosto.jpg"
                     alt="Kael">
+
             </div>
 
 
@@ -213,6 +236,9 @@
             </div>
 
         </section>
+
+
+        <!-- ================= ATRIBUTOS ================= -->
 
         <section class="section attributes" id="atributos">
 
@@ -344,6 +370,8 @@
         </section>
 
 
+        <!-- ================= INVENTÁRIO ================= -->
+
         <section class="section inventory" id="inventario">
 
             <div class="section-heading">
@@ -368,7 +396,9 @@
 
                 <div class="weapon-image">
 
-                    <img src="imagens/imagem3_castelo.png"
+                    <!-- IMAGEM DA ARMA -->
+
+                    <img src="img/arma-kael.jpg"
                         alt="Arma de Kael">
 
                 </div>
@@ -478,6 +508,8 @@
 
         </section>
 
+
+        <!-- ================= CONQUISTAS ================= -->
 
         <section class="section achievements" id="conquistas">
 
@@ -601,6 +633,8 @@
         </section>
 
 
+        <!-- ================= CONTATO ================= -->
+
         <section class="section contact" id="contato">
 
             <div class="contact-container">
@@ -638,7 +672,7 @@
                             @kael.guardiao
                         </a>
 
-                        <a href="https://github.com/ricardosantana10/ficha-heroi-parte1">
+                        <a href="#">
                             <i class="fa-brands fa-github"></i>
                             Projeto Kael
                         </a>
@@ -709,6 +743,7 @@
     </main>
 
 
+    <!-- ================= FOOTER ================= -->
 
     <footer class="footer">
 
@@ -791,7 +826,7 @@
                         <i class="fa-brands fa-instagram"></i>
                     </a>
 
-                    <a href="https://github.com/ricardosantana10/ficha-heroi-parte1">
+                    <a href="#">
                         <i class="fa-brands fa-github"></i>
                     </a>
 
@@ -809,10 +844,11 @@
         <div class="footer-bottom">
 
             <p>
-                © 2026 Ricardo Santana — Todos os direitos reservados.
+                © 2026 KAEL — O Último Guardião.
             </p>
 
             <p>
+                Projeto acadêmico.
             </p>
 
         </div>
@@ -820,6 +856,5 @@
     </footer>
 
 </body>
-    <script src="script.js"></script>
 
 </html>
