@@ -1,38 +1,3 @@
-
-const menuToggle = document.getElementById("menu-toggle");
-const nav = document.getElementById("nav");
-
-menuToggle.addEventListener("click", function () {
-    nav.classList.toggle("active");
-    menuToggle.classList.toggle("active");
-
-    const menuAberto = nav.classList.contains("active");
-
-    menuToggle.setAttribute("aria-expanded", menuAberto);
-    menuToggle.setAttribute(
-        "aria-label",
-        menuAberto ? "Fechar menu" : "Abrir menu"
-    );
-});
-
-// Fecha o menu quando um link é selecionado
-nav.querySelectorAll("a").forEach(function (link) {
-    link.addEventListener("click", function () {
-        nav.classList.remove("active");
-        menuToggle.classList.remove("active");
-
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.setAttribute("aria-label", "Abrir menu");
-    });
-});
-
-
-
-/* =========================================================
-   KAEL — O ÚLTIMO GUARDIÃO
-   JavaScript da Parte 2
-   ========================================================= */
-
 document.addEventListener("DOMContentLoaded", () => {
 
     // 1. MENU RESPONSIVO
@@ -401,82 +366,103 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 6. FORMULÁRIO DE CONTATO
 
-    const formulario = document.querySelector(".contact-form");
 
-    if (formulario) {
-        const campoNome = formulario.querySelector("#nome");
-        const campoEmail = formulario.querySelector("#email");
-        const campoMensagem = formulario.querySelector("#mensagem");
+// 6. FORMULÁRIO DE CONTATO COM ENVIO DE E-MAIL
 
-        const feedbackFormulario = document.createElement("p");
+const formulario = document.querySelector(".contact-form");
 
-        feedbackFormulario.className = "form-feedback";
-        feedbackFormulario.setAttribute("aria-live", "polite");
+if (formulario) {
+    const campoNome = formulario.querySelector("#nome");
+    const campoEmail = formulario.querySelector("#email");
+    const campoMensagem = formulario.querySelector("#mensagem");
 
-        formulario.appendChild(feedbackFormulario);
+    const feedbackFormulario = document.createElement("p");
+    feedbackFormulario.className = "form-feedback";
+    feedbackFormulario.setAttribute("aria-live", "polite");
 
-        formulario.addEventListener("submit", (event) => {
-            event.preventDefault();
+    formulario.appendChild(feedbackFormulario);
 
-            const nome = campoNome.value.trim();
-            const email = campoEmail.value.trim();
-            const mensagem = campoMensagem.value.trim();
+    formulario.addEventListener("submit", async (event) => {
+        event.preventDefault();
 
-            const formatoEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const nome = campoNome.value.trim();
+        const email = campoEmail.value.trim();
+        const mensagem = campoMensagem.value.trim();
 
-            [campoNome, campoEmail, campoMensagem].forEach((campo) => {
-                campo.classList.remove("input-error");
-                campo.removeAttribute("aria-invalid");
-            });
+        const formatoEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-            feedbackFormulario.classList.remove("success", "error");
+        feedbackFormulario.classList.remove("success", "error");
 
-            if (!nome || !email || !mensagem) {
-                feedbackFormulario.textContent =
-                    "Preencha todos os campos antes de enviar.";
+        if (!nome || !email || !mensagem) {
+            feedbackFormulario.textContent =
+                "Preencha todos os campos antes de enviar.";
+            feedbackFormulario.classList.add("error");
+            return;
+        }
 
-                feedbackFormulario.classList.add("error");
+        if (!formatoEmail.test(email)) {
+            feedbackFormulario.textContent =
+                "Digite um endereço de e-mail válido.";
+            feedbackFormulario.classList.add("error");
+            campoEmail.focus();
+            return;
+        }
 
-                if (!nome) campoNome.classList.add("input-error");
-                if (!email) campoEmail.classList.add("input-error");
-                if (!mensagem) campoMensagem.classList.add("input-error");
+        // Substitua pelos seus dados do EmailJS
+        const SERVICE_ID = "SEU_SERVICE_ID";
+        const TEMPLATE_ID = "SEU_TEMPLATE_ID";
+        const PUBLIC_KEY = "SUA_PUBLIC_KEY";
 
-                [campoNome, campoEmail, campoMensagem].forEach((campo) => {
-                    if (!campo.value.trim()) {
-                        campo.setAttribute("aria-invalid", "true");
-                    }
-                });
+        const parametros = {
+            from_name: nome,
+            from_email: email,
+            reply_to: email,
+            message: mensagem
+        };
 
-                return;
-            }
+        const botaoEnviar = formulario.querySelector(
+            'button[type="submit"], input[type="submit"]'
+        );
 
-            if (!formatoEmail.test(email)) {
-                feedbackFormulario.textContent =
-                    "Digite um endereço de e-mail válido.";
+        if (botaoEnviar) {
+            botaoEnviar.disabled = true;
+            botaoEnviar.textContent = "Enviando...";
+        }
 
-                feedbackFormulario.classList.add("error");
-                campoEmail.classList.add("input-error");
-                campoEmail.setAttribute("aria-invalid", "true");
-                campoEmail.focus();
+        feedbackFormulario.textContent = "Enviando sua mensagem...";
 
-                return;
-            }
+        try {
+            await emailjs.send(
+                service_7d449lg,
+                template_a801odk,
+                parametros,
+                { publicKey: W3ufJ4RTBJsaXAkeE }
+            );
 
             feedbackFormulario.textContent =
-                `Mensagem validada, ${nome}! O formulário está pronto para envio.`;
+                "Mensagem enviada com sucesso! Obrigado pelo contato.";
 
             feedbackFormulario.classList.add("success");
 
             formulario.reset();
-        });
 
-        [campoNome, campoEmail, campoMensagem].forEach((campo) => {
-            campo.addEventListener("input", () => {
-                campo.classList.remove("input-error");
-                campo.removeAttribute("aria-invalid");
-            });
-        });
-    }
+        } catch (erro) {
+            console.error("Erro ao enviar e-mail:", erro);
+
+            feedbackFormulario.textContent =
+                "Não foi possível enviar sua mensagem. Tente novamente.";
+
+            feedbackFormulario.classList.add("error");
+
+        } finally {
+            if (botaoEnviar) {
+                botaoEnviar.disabled = false;
+                botaoEnviar.textContent = "Enviar mensagem";
+            }
+        }
+    });
+}
+
 
 
     // 7. MODO CLARO E ESCURO
@@ -485,7 +471,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     botaoTema.type = "button";
     botaoTema.className = "theme-toggle";
-    botaoTema.textContent = "☾ Modo da guilda";
+    botaoTema.textContent = "☾ Modo da Claro";
     botaoTema.setAttribute("aria-pressed", "false");
     botaoTema.setAttribute("aria-label", "Ativar modo claro");
 
@@ -508,7 +494,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             botaoTema.textContent = modoClaro
                 ? "☀ Modo escuro"
-                : "☾ Modo da guilda";
+                : "☾ Modo da Claro";
 
             botaoTema.setAttribute("aria-pressed", String(modoClaro));
 
