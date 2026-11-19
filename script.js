@@ -366,101 +366,99 @@ document.addEventListener("DOMContentLoaded", () => {
 // 6. FORMULÁRIO DE CONTATO COM ENVIO DE E-MAIL
 
 
-// 6. FORMULÁRIO DE CONTATO COM ENVIO DE E-MAIL
 
-const formulario = document.querySelector(".contact-form");
+    // 6. FORMULÁRIO DE CONTATO COM ENVIO DE E-MAIL
 
-if (formulario) {
-    const campoNome = formulario.querySelector("#nome");
-    const campoEmail = formulario.querySelector("#email");
-    const campoMensagem = formulario.querySelector("#mensagem");
+    const formulario = document.querySelector(".contact-form");
 
-    const feedbackFormulario = document.createElement("p");
-    feedbackFormulario.className = "form-feedback";
-    feedbackFormulario.setAttribute("aria-live", "polite");
+    if (formulario) {
+        const campoNome = formulario.querySelector("#nome");
+        const campoEmail = formulario.querySelector("#email");
+        const campoMensagem = formulario.querySelector("#mensagem");
 
-    formulario.appendChild(feedbackFormulario);
+        const feedbackFormulario = document.createElement("p");
+        feedbackFormulario.className = "form-feedback";
+        feedbackFormulario.setAttribute("aria-live", "polite");
 
-    formulario.addEventListener("submit", async (event) => {
-        event.preventDefault();
+        formulario.appendChild(feedbackFormulario);
 
-        const nome = campoNome.value.trim();
-        const email = campoEmail.value.trim();
-        const mensagem = campoMensagem.value.trim();
+        formulario.addEventListener("submit", async (event) => {
+            event.preventDefault();
 
-        const formatoEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const nome = campoNome.value.trim();
+            const email = campoEmail.value.trim();
+            const mensagem = campoMensagem.value.trim();
 
-        feedbackFormulario.classList.remove("success", "error");
+            const formatoEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if (!nome || !email || !mensagem) {
-            feedbackFormulario.textContent =
-                "Preencha todos os campos antes de enviar.";
-            feedbackFormulario.classList.add("error");
-            return;
-        }
+            feedbackFormulario.classList.remove("success", "error");
 
-        if (!formatoEmail.test(email)) {
-            feedbackFormulario.textContent =
-                "Digite um endereço de e-mail válido.";
-            feedbackFormulario.classList.add("error");
-            campoEmail.focus();
-            return;
-        }
+            if (!nome || !email || !mensagem) {
+                feedbackFormulario.textContent =
+                    "Preencha todos os campos antes de enviar.";
+                feedbackFormulario.classList.add("error");
+                return;
+            }
 
-        // Substitua pelos seus dados do EmailJS
-        const SERVICE_ID = "SEU_SERVICE_ID";
-        const TEMPLATE_ID = "SEU_TEMPLATE_ID";
-        const PUBLIC_KEY = "SUA_PUBLIC_KEY";
+            if (!formatoEmail.test(email)) {
+                feedbackFormulario.textContent =
+                    "Digite um endereço de e-mail válido.";
+                feedbackFormulario.classList.add("error");
+                campoEmail.focus();
+                return;
+            }
 
-        const parametros = {
-            from_name: nome,
-            from_email: email,
-            reply_to: email,
-            message: mensagem
-        };
+            // Dados da sua conta EmailJS
+            const SERVICE_ID = "service_7d449lg";
+            const TEMPLATE_ID = "template_a801odk";
+            const PUBLIC_KEY = "W3ufJ4RTBJsaXAkeE";
 
-        const botaoEnviar = formulario.querySelector(
-            'button[type="submit"], input[type="submit"]'
-        );
+            const parametros = {
+                from_name: nome,
+                from_email: email,
+                reply_to: email,
+                message: mensagem
+            };
 
-        if (botaoEnviar) {
-            botaoEnviar.disabled = true;
-            botaoEnviar.textContent = "Enviando...";
-        }
-
-        feedbackFormulario.textContent = "Enviando sua mensagem...";
-
-        try {
-            await emailjs.send(
-                service_7d449lg,
-                template_a801odk,
-                parametros,
-                { publicKey: W3ufJ4RTBJsaXAkeE }
+            const botaoEnviar = formulario.querySelector(
+                'button[type="submit"]'
             );
 
-            feedbackFormulario.textContent =
-                "Mensagem enviada com sucesso! Obrigado pelo contato.";
+            botaoEnviar.disabled = true;
+            botaoEnviar.textContent = "Enviando...";
 
-            feedbackFormulario.classList.add("success");
+            feedbackFormulario.textContent = "Enviando sua mensagem...";
 
-            formulario.reset();
+            try {
+                await emailjs.send(
+                    SERVICE_ID,
+                    TEMPLATE_ID,
+                    parametros,
+                    { publicKey: PUBLIC_KEY }
+                );
 
-        } catch (erro) {
-            console.error("Erro ao enviar e-mail:", erro);
+                feedbackFormulario.textContent =
+                    "Mensagem enviada com sucesso! Obrigado pelo contato.";
 
-            feedbackFormulario.textContent =
-                "Não foi possível enviar sua mensagem. Tente novamente.";
+                feedbackFormulario.classList.add("success");
 
-            feedbackFormulario.classList.add("error");
+                formulario.reset();
 
-        } finally {
-            if (botaoEnviar) {
+            } catch (erro) {
+                console.error("Erro ao enviar e-mail:", erro);
+
+                feedbackFormulario.textContent =
+                    "Não foi possível enviar sua mensagem. Tente novamente.";
+
+                feedbackFormulario.classList.add("error");
+
+            } finally {
                 botaoEnviar.disabled = false;
-                botaoEnviar.textContent = "Enviar mensagem";
+                botaoEnviar.innerHTML =
+                    'Enviar mensagem <i class="fa-solid fa-arrow-right"></i>';
             }
-        }
-    });
-}
+        });
+    }
 
 
     // 7. MODO CLARO E ESCURO
