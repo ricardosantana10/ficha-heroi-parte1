@@ -467,7 +467,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     botaoTema.type = "button";
     botaoTema.className = "theme-toggle";
-    botaoTema.textContent = "☾ Modo da Claro";
+    botaoTema.textContent = "☾ Modo Claro";
     botaoTema.setAttribute("aria-pressed", "false");
     botaoTema.setAttribute("aria-label", "Ativar modo claro");
 
