@@ -363,8 +363,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-
-    // 6. FORMULÁRIO DE CONTATO
+// 6. FORMULÁRIO DE CONTATO COM ENVIO DE E-MAIL
 
 
 // 6. FORMULÁRIO DE CONTATO COM ENVIO DE E-MAIL
@@ -462,7 +461,6 @@ if (formulario) {
         }
     });
 }
-
 
 
     // 7. MODO CLARO E ESCURO
